@@ -31,7 +31,7 @@ npm install
 npm run dev
 ```
 
-Die App liegt unter [http://127.0.0.1:4317](http://127.0.0.1:4317). Der Port ist fest, weil Google den Ursprung **inklusive Port** braucht.
+Die App liegt unter [http://127.0.0.1:4317/kalender/](http://127.0.0.1:4317/kalender/). Der Port ist fest, weil Google den Ursprung **inklusive Port** braucht. Der Pfad `/kalender/` ist derselbe wie auf GitHub Pages.
 
 ```bash
 npm test          # Datum, Zeitzone, API-Körper
@@ -59,17 +59,18 @@ Die Client-ID trägst du selbst ein. Sie ist kein Geheimnis (sie steht im Browse
    - **Autorisierte JavaScript-Ursprünge** (nur die Herkunft, kein Pfad, kein Schrägstrich am Ende):
      - `http://localhost:4317`
      - `http://127.0.0.1:4317`
-     - `https://DEINNAME.github.io` wenn die App auf GitHub Pages liegt
-   - **Autorisierte Weiterleitungs-URIs**, damit die Anmeldung auf dem iPhone zurückfindet. Trag die genaue Adresse der Seite ein, zum Beispiel:
-     - `http://localhost:4317/`
-     - `http://127.0.0.1:4317/`
-     - `https://DEINNAME.github.io/` oder `https://DEINNAME.github.io/REPO/`
+     - `https://akanooooo.github.io`
+   - **Autorisierte Weiterleitungs-URIs**, damit die Anmeldung auf dem iPhone zurückfindet. Das sind Seitenadressen, deshalb steht hier `/kalender/`:
+     - `http://localhost:4317/kalender/`
+     - `http://127.0.0.1:4317/kalender/`
+     - `https://akanooooo.github.io/kalender/`
+     - `https://akanooooo.github.io/kalender/index.html`
    - Wenn Google später `redirect_uri_mismatch` meldet, steht in der Fehlermeldung die exakte URI. Die kopierst du in dieses Feld.
 6. Erstellen. Die angezeigte **Client-ID** endet auf `.apps.googleusercontent.com`. Das Secret ignorierst du.
 
 `http://localhost:4317` und `http://127.0.0.1:4317` sind für Google zwei verschiedene Ursprünge. Trag beide ein, wenn du beide Adressen benutzt.
 
-Bei einer Projekt-Seite auf GitHub Pages (`https://name.github.io/kalender/`) ist der JavaScript-Ursprung trotzdem nur `https://name.github.io`, ohne den Ordnernamen.
+Die öffentliche Seite ist `https://akanooooo.github.io/kalender/`. Der JavaScript-Ursprung dafür ist nur `https://akanooooo.github.io`, ohne `/kalender`. Der Pfad gehört in die Weiterleitungs-URI.
 
 ## Client-ID eintragen
 
@@ -89,15 +90,15 @@ Die Anmeldung öffnet ein Google-Fenster. Am Rechner ist das ein Pop-up (Pop-ups
 
 ## Auf GitHub Pages veröffentlichen
 
-Die gebaute App ist statisch (`dist/`). Relative Pfade funktionieren sowohl unter `https://name.github.io/` als auch unter `https://name.github.io/repo/`.
+Die gebaute App ist statisch (`dist/`). Vite setzt `base` auf `/kalender/`, passend zu [https://akanooooo.github.io/kalender/](https://akanooooo.github.io/kalender/). Manifest (`start_url`, `scope`, Icons) und der Service Worker nutzen denselben Pfad.
 
 In diesem Repo liegt `.github/workflows/pages.yml`. So geht’s:
 
-1. Das Repo auf GitHub bringen (öffentlich, oder privates Repo mit GitHub Pages).
+1. Das Repo ist [github.com/Akanooooo/kalender](https://github.com/Akanooooo/kalender).
 2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
 3. Den Workflow auf `main` laufen lassen, oder unter **Actions** manuell starten.
-4. Die Seiten-URL aus dem Workflow oder aus den Pages-Einstellungen kopieren.
-5. Diese Herkunft und die genaue Seiten-URL in der Google-Cloud-Console nachtragen (siehe oben), `config.js` in `public/config.js` mit der Client-ID füllen, und noch einmal bauen und ausliefern.
+4. Die Seite ist danach unter [https://akanooooo.github.io/kalender/](https://akanooooo.github.io/kalender/) erreichbar.
+5. Die JavaScript-Ursprünge und Weiterleitungs-URIs von oben in der Google-Cloud-Console eintragen, die Client-ID in `public/config.js` setzen, und noch einmal ausliefern.
 
 Ohne Actions: `npm run build` und den **Inhalt** von `dist/` hochladen. Eine Datei namens `.nojekyll` liegt schon dabei, damit GitHub Pages nichts ausfiltert.
 

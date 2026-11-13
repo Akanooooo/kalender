@@ -756,7 +756,9 @@ function registerServiceWorker() {
   if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return;
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register(new URL(/* @vite-ignore */ '../sw.js', import.meta.url))
+      .register(new URL(/* @vite-ignore */ '../sw.js', import.meta.url), {
+        scope: import.meta.env.BASE_URL,
+      })
       .catch((error) => {
         console.error('Service Worker', error);
       });

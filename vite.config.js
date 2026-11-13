@@ -31,12 +31,11 @@ function injectPrecache() {
   };
 }
 
-// Relative Pfade, damit die App sowohl unter / als auch in einem
-// GitHub-Pages-Unterordner (https://name.github.io/repo/) funktioniert.
+// Projekt-Seite: https://akanooooo.github.io/kalender/
 // Port 4317 ist fest, weil die Google-Cloud-Console den Ursprung
 // inklusive Port als autorisierten JavaScript-Ursprung braucht.
 export default defineConfig({
-  base: './',
+  base: '/kalender/',
   appType: 'spa',
   plugins: [injectPrecache()],
   server: {

@@ -1,6 +1,6 @@
 // Hülle der App offline bereithalten und zuletzt geladene Dateien behalten.
 // Termine selbst legt die App in localStorage ab, nicht hier.
-const CACHE = 'kalender-shell-v1';
+const CACHE = 'kalender-shell-v2';
 
 const PRECACHE = [
   './',
