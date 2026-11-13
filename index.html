@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="referrer" content="origin" />
+    <meta name="description" content="Persönlicher Kalender für deinen Google-Kalender. Deutsch, Europe/Berlin." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Kalender" />
+    <title>Kalender</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('kalender.v1.ui');
+          var theme = raw ? JSON.parse(raw).theme : 'system';
+          var dark =
+            theme === 'dark' ||
+            (theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+    <style>
+      html[data-theme='dark'] { background: #000; color: #fff; }
+      html[data-theme='light'] { background: #f2f2f7; color: #1c1c1e; }
+      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    </style>
+    <script src="./config.js"></script>
+  </head>
+  <body>
+    <div class="app-frame">
+      <a class="skip" href="#inhalt">Zum Inhalt</a>
+      <div id="main">
+        <noscript><p class="fatal">Kalender braucht JavaScript.</p></noscript>
+      </div>
+      <div id="overlay"></div>
+      <div id="toast" role="status" aria-live="polite" hidden></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
