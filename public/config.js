@@ -10,5 +10,5 @@
 //   googleClientId: "1234567890-abc123xyz.apps.googleusercontent.com",
 //
 window.KALENDER_CONFIG = {
-  googleClientId: "",
+  googleClientId: "384770929748-7v8lgn6gio42irrj6nhkuqh0pg9gk83e.apps.googleusercontent.com",
 };
